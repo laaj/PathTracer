@@ -1,6 +1,12 @@
+#include "Core/Log.h"
+
 int main()
 {
-	std::cout << "hello" << std::endl;
+	pt::Log::init();
+	pt::Log::info("Hello, {}!", "World");
+	pt::Log::trace("Hello, {}!", "World");
+	pt::Log::warn("Hello, {}!", "World");
+	pt::Log::error("Hello, {}!", "World");
 
 	return 0;
 }

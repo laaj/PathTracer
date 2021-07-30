@@ -2,6 +2,9 @@
 set(SOURCE_FILES
 	main.cpp
 	mypch.h
+
+	Core/Log.h
+	Core/Log.cpp
 )
 
 # Preserve the project hierarchy in IDEs
