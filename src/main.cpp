@@ -1,12 +1,15 @@
-#include "Core/Log.h"
+#include "Log.h"
+
+using namespace pt;
 
 int main()
 {
-	pt::Log::init();
-	pt::Log::info("Hello, {}!", "World");
-	pt::Log::trace("Hello, {}!", "World");
-	pt::Log::warn("Hello, {}!", "World");
-	pt::Log::error("Hello, {}!", "World");
+	Log::init();
+
+	Log::info("Hello, {}!", "World");
+	Log::trace("Hello, {}!", "World");
+	Log::warn("Hello, {}!", "World");
+	Log::error("Hello, {}!", "World");
 
 	return 0;
 }

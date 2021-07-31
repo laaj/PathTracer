@@ -2,9 +2,15 @@
 set(SOURCE_FILES
 	main.cpp
 	mypch.h
+	Log.h
+	Log.cpp
+	utils.h
+	utils.cpp
 
-	Core/Log.h
-	Core/Log.cpp
+	GUI/Event.h
+	GUI/WindowEvent.h
+	GUI/MouseEvent.h
+	GUI/KeyEvent.h
 )
 
 # Preserve the project hierarchy in IDEs
@@ -22,8 +28,10 @@ target_precompile_headers(${PROJECT_NAME} PRIVATE mypch.h)
 
 # Compiler settings
 if(MSVC)
-	target_compile_options(${PROJECT_NAME} PRIVATE /W4 /WX /MP)
+	target_compile_options(${PROJECT_NAME} PRIVATE /W4 /MP)
 endif()
+
+target_compile_definitions(${PROJECT_NAME} PRIVATE "$<$<CONFIG:DEBUG>:PT_DEBUG>")
 
 # Visual Studio stuff
 set_property(DIRECTORY "${CMAKE_SOURCE_DIR}" PROPERTY VS_STARTUP_PROJECT ${PROJECT_NAME})

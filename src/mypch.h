@@ -1,3 +1,5 @@
+#pragma once
+
 #include <iostream>
 #include <memory>
 #include <utility>
@@ -9,3 +11,7 @@
 #include <vector>
 #include <unordered_map>
 #include <unordered_set>
+#include <cstdlib>
+
+#include "utils.h"
+#include "Log.h"
