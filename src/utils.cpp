@@ -3,6 +3,6 @@
 
 void pt::crash(const std::string& msg)
 {
-	Log::error("A crash occurred: {}", msg);
+	Log::error("Critical error: {}", msg);
 	std::exit(EXIT_FAILURE);
 }
