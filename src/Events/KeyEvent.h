@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Event.h"
+#include <sstream>
 
 namespace pt
 {
@@ -11,7 +12,8 @@ public:
 	int getKeyCode() const { return m_keyCode; }
 
 protected:
-	KeyEvent(int keyCode) : m_keyCode(keyCode) {}
+	KeyEvent(int keyCode)
+		: m_keyCode(keyCode) {}
 
 	int m_keyCode;
 };
@@ -19,36 +21,34 @@ protected:
 class KeyPressEvent : public KeyEvent
 {
 public:
-	KeyPressEvent(int keyCode, bool isRepeated) : KeyEvent(keyCode), m_isRepeated(isRepeated) {}
+	KeyPressEvent(int keyCode, bool repeated)
+		: KeyEvent(keyCode), m_repeated(repeated) {}
 
-	bool isRepeated() const { return m_isRepeated; }
+	bool isRepeated() const { return m_repeated; }
 
 	virtual std::string toString() const override
 	{
 		std::stringstream ss;
-		ss << "KeyPressEvent: " << m_keyCode << " (key), " << m_isRepeated << " (repeat)";
+		ss << "KeyPressEvent: " << m_keyCode << " (" << (m_repeated  ? "repeated" : "single") << ")";
 		return ss.str();
 	}
 
-	EVENT_TYPE(KeyPress)
-
 private:
-	bool m_isRepeated;
+	bool m_repeated;
 };
 
 class KeyReleaseEvent : public KeyEvent
 {
 public:
-	KeyReleaseEvent(int keyCode) : KeyEvent(keyCode) {}
+	KeyReleaseEvent(int keyCode)
+		: KeyEvent(keyCode) {}
 
 	virtual std::string toString() const override
 	{
 		std::stringstream ss;
-		ss << "KeyReleaseEvent: " << m_keyCode << " (key)";
+		ss << "KeyReleaseEvent: " << m_keyCode;
 		return ss.str();
 	}
-
-	EVENT_TYPE(KeyRelease)
 };
 
 }

@@ -19,6 +19,8 @@ namespace pt
 	#define PT_ASSERT(cond)
 #endif
 
+#define BIND_FN(fn) [this](auto&&... args) -> decltype(auto) { return this->fn(std::forward<decltype(args)>(args)...); }
+
 void crash(const std::string& msg);
 
 }

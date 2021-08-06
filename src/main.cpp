@@ -1,4 +1,6 @@
-#include "Log.h"
+#include "Core/Log.h"
+#include "Application.h"
+#include "Events/WindowEvent.h"
 
 using namespace pt;
 
@@ -7,10 +9,8 @@ int main()
 	{
 		Log::init();
 
-		Log::info("Hello, {}!", "World");
-		Log::trace("Hello, {}!", "World");
-		Log::warn("Hello, {}!", "World");
-		Log::error("Hello, {}!", "World");
+		Application app;
+		app.run();
 	}
 
 	return 0;

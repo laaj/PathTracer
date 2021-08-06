@@ -12,6 +12,8 @@
 #include <unordered_map>
 #include <unordered_set>
 #include <cstdlib>
+#include <typeinfo>
+#include <typeindex>
 
-#include "utils.h"
-#include "Log.h"
+#include "Core/utils.h"
+#include "Core/Log.h"

@@ -2,17 +2,22 @@
 set(SOURCE_FILES
 	main.cpp
 	mypch.h
-	Log.h
-	Log.cpp
-	utils.h
-	utils.cpp
+	Application.h
+	Application.cpp
 
-	GUI/Event.h
-	GUI/WindowEvent.h
-	GUI/MouseEvent.h
-	GUI/KeyEvent.h
-	GUI/Window.h
-	GUI/Window.cpp
+	Core/Log.h
+	Core/Log.cpp
+	Core/utils.h
+	Core/utils.cpp
+
+	Events/Event.h
+	Events/EventDispatcher.h
+	Events/KeyEvent.h
+	Events/MouseEvent.h
+	Events/WindowEvent.h
+
+	UI/Window.h
+	UI/Window.cpp
 )
 
 # Preserve the project hierarchy in IDEs

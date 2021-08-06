@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Event.h"
+#include <sstream>
 
 namespace pt
 {
@@ -11,45 +12,45 @@ public:
 	int getButton() const { return m_button; }
 
 protected:
-	MouseButtonEvent(int button) : m_button(button) {}
+	MouseButtonEvent(int button)
+		: m_button(button) {}
 
 	int m_button;
 };
 
-class MousePressEvent : public MouseButtonEvent
+class MouseButtonPressEvent : public MouseButtonEvent
 {
 public:
-	MousePressEvent(int button) : MouseButtonEvent(button) {}
+	MouseButtonPressEvent(int button)
+		: MouseButtonEvent(button) {}
 
 	virtual std::string toString() const override
 	{
 		std::stringstream ss;
-		ss << "MousePressEvent: " << m_button << " (button)";
+		ss << "MouseButtonPressEvent: " << m_button;
 		return ss.str();
 	}
-
-	EVENT_TYPE(MouseButtonPress)
 };
 
-class MouseReleaseEvent : public MouseButtonEvent
+class MouseButtonReleaseEvent : public MouseButtonEvent
 {
 public:
-	MouseReleaseEvent(int button) : MouseButtonEvent(button) {}
+	MouseButtonReleaseEvent(int button)
+		: MouseButtonEvent(button) {}
 
 	virtual std::string toString() const override
 	{
 		std::stringstream ss;
-		ss << "MouseReleaseEvent: " << m_button << " (button)";
+		ss << "MouseButtonReleaseEvent: " << m_button;
 		return ss.str();
 	}
-
-	EVENT_TYPE(MouseButtonRelease)
 };
 
 class MouseMoveEvent : public Event
 {
 public:
-	MouseMoveEvent(float x, float y) : m_x(x), m_y(y) {}
+	MouseMoveEvent(float x, float y)
+		: m_x(x), m_y(y) {}
 
 	float getX() const { return m_x; }
 	float getY() const { return m_y; }
@@ -61,8 +62,6 @@ public:
 		return ss.str();
 	}
 
-	EVENT_TYPE(MouseMove)
-
 private:
 	float m_x, m_y;
 };
@@ -70,7 +69,11 @@ private:
 class MouseScrollEvent : public Event
 {
 public:
-	MouseScrollEvent(float xOffset, float yOffset) : m_xOffset(xOffset), m_yOffset(yOffset) {}
+	MouseScrollEvent(float xOffset, float yOffset)
+		: m_xOffset(xOffset), m_yOffset(yOffset) {}
+
+	float getXOffset() const { return m_xOffset; }
+	float getYOffset() const { return m_yOffset; }
 
 	virtual std::string toString() const override
 	{
@@ -78,8 +81,6 @@ public:
 		ss << "MouseScrollEvent: " << m_xOffset << ", " << m_yOffset;
 		return ss.str();
 	}
-
-	EVENT_TYPE(MouseScroll)
 
 private:
 	float m_xOffset, m_yOffset;
