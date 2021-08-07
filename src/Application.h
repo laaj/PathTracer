@@ -1,6 +1,7 @@
 #pragma once
 
 #include "UI/Window.h"
+#include "UI/Editor.h"
 #include "Events/KeyEvent.h"
 #include "Events/MouseEvent.h"
 #include "Events/WindowEvent.h"
@@ -15,6 +16,8 @@ public:
 
 	static Application& get() { return *s_instance; }
 
+	Window& getWindow() { return m_window; }
+
 	void run();
 
 	Application(const Application&) = delete;
@@ -27,6 +30,7 @@ private:
 
 private:
 	Window m_window;
+	Editor m_editor;
 	bool m_running = true;
 
 	static Application* s_instance;

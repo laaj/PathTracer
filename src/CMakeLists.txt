@@ -18,6 +18,8 @@ set(SOURCE_FILES
 
 	UI/Window.h
 	UI/Window.cpp
+	UI/Editor.h
+	UI/Editor.cpp
 )
 
 # Preserve the project hierarchy in IDEs
@@ -26,11 +28,7 @@ source_group(TREE "${CMAKE_SOURCE_DIR}" FILES ${SOURCE_FILES})
 # The executable
 add_executable(${PROJECT_NAME} ${SOURCE_FILES})
 target_include_directories(${PROJECT_NAME} PRIVATE ${CMAKE_CURRENT_SOURCE_DIR})
-target_link_libraries(${PROJECT_NAME} PRIVATE
-	spdlog
-	glfw
-	glad
-)
+target_link_libraries(${PROJECT_NAME} PRIVATE ${LIBRARIES})
 
 # Precompiled headers
 target_precompile_headers(${PROJECT_NAME} PRIVATE mypch.h)

@@ -9,8 +9,14 @@ Application::Application()
 	: m_window(800, 600, "Path Tracer")
 {
 	s_instance = this;	
+
+	Log::init();
+	m_window.init();
+	m_editor.init();
+
+	// Window event callbacks.
 	auto& windowEventBinder = m_window.getEventBinder();
-	windowEventBinder.addHandler<WindowCloseEvent>(BIND_FN(handleWindowClose));
+	windowEventBinder.addHandler<WindowCloseEvent>(PT_BIND_FN(handleWindowClose));
 }
 
 void Application::run()
@@ -20,19 +26,23 @@ void Application::run()
 		glClearColor(0, 0, 0, 1);
 		glClear(GL_COLOR_BUFFER_BIT);
 
+		m_editor.render();
+
 		m_window.swapBuffers();
 		m_window.pollEvents();
 	}
 }
 
-bool Application::handleWindowClose(WindowCloseEvent& ev)
-{
-	m_running = false;
-	return true;
-}
-
 void Application::update()
 {
+}
+
+bool Application::handleWindowClose(WindowCloseEvent& ev)
+{
+	PT_UNUSED(ev);
+
+	m_running = false;
+	return true;
 }
 
 }

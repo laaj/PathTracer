@@ -15,6 +15,11 @@ public:
 	{
 		return "WindowCloseEvent";
 	}
+
+	virtual EventCategory getEventCategory() const override
+	{
+		return EventCategory::Application;
+	}
 };
 
 class WindowResizeEvent : public Event
@@ -31,6 +36,11 @@ public:
 		std::stringstream ss;
 		ss << "WindowResizeEvent: " << m_width << " " << m_height;
 		return ss.str();
+	}
+
+	virtual EventCategory getEventCategory() const override
+	{
+		return EventCategory::Application;
 	}
 
 private:

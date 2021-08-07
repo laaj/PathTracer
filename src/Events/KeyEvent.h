@@ -9,6 +9,11 @@ namespace pt
 class KeyEvent : public Event
 {
 public:
+	virtual EventCategory getEventCategory() const override
+	{
+		return EventCategory::Keyboard;
+	}
+
 	int getKeyCode() const { return m_keyCode; }
 
 protected:

@@ -9,6 +9,11 @@ namespace pt
 class MouseButtonEvent : public Event
 {
 public:
+	virtual EventCategory getEventCategory() const override
+	{
+		return EventCategory::Mouse;
+	}
+
 	int getButton() const { return m_button; }
 
 protected:
@@ -62,6 +67,11 @@ public:
 		return ss.str();
 	}
 
+	virtual EventCategory getEventCategory() const override
+	{
+		return EventCategory::Mouse;
+	}
+
 private:
 	float m_x, m_y;
 };
@@ -80,6 +90,11 @@ public:
 		std::stringstream ss;
 		ss << "MouseScrollEvent: " << m_xOffset << ", " << m_yOffset;
 		return ss.str();
+	}
+
+	virtual EventCategory getEventCategory() const override
+	{
+		return EventCategory::Mouse;
 	}
 
 private:

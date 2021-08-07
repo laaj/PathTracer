@@ -9,6 +9,16 @@ namespace pt
 Window::Window(uint32_t width, uint32_t height, const std::string& title)
 	: m_width(width), m_height(height), m_title(title)
 {
+
+}
+
+Window::~Window()
+{
+	glfwTerminate();
+}
+
+void Window::init()
+{
 	// Initialize GLFW and glad.
 	if (!glfwInit())
 		crash("Failed to initialize GLFW.");
@@ -52,6 +62,9 @@ Window::Window(uint32_t width, uint32_t height, const std::string& title)
 
 	glfwSetKeyCallback(m_window, [](GLFWwindow* window, int key, int scancode, int action, int mods)
 		{
+			PT_UNUSED(scancode);
+			PT_UNUSED(mods);
+
 			Window* ctx = static_cast<Window*>(glfwGetWindowUserPointer(window));
 			switch (action)
 			{
@@ -81,12 +94,14 @@ Window::Window(uint32_t width, uint32_t height, const std::string& title)
 	glfwSetCursorPosCallback(m_window, [](GLFWwindow* window, double xpos, double ypos)
 		{
 			Window* ctx = static_cast<Window*>(glfwGetWindowUserPointer(window));
-			MouseMoveEvent ev(xpos, ypos);
+			MouseMoveEvent ev(static_cast<float>(xpos), static_cast<float>(ypos));
 			ctx->m_windowEventDispatcher.dispatch(ev);
 		});
 
 	glfwSetMouseButtonCallback(m_window, [](GLFWwindow* window, int button, int action, int mods)
 		{
+			PT_UNUSED(mods);
+
 			Window* ctx = static_cast<Window*>(glfwGetWindowUserPointer(window));
 			switch (action)
 			{
@@ -110,19 +125,14 @@ Window::Window(uint32_t width, uint32_t height, const std::string& title)
 	glfwSetScrollCallback(m_window, [](GLFWwindow* window, double xoffset, double yoffset)
 		{
 			Window* ctx = static_cast<Window*>(glfwGetWindowUserPointer(window));
-			MouseScrollEvent ev(xoffset, yoffset);
+			MouseScrollEvent ev(static_cast<float>(xoffset), static_cast<float>(yoffset));
 			ctx->m_windowEventDispatcher.dispatch(ev);
 		});
 
 	glfwSetErrorCallback([](int error, const char* description)
 		{
-			Log::error("GLFW error: {}", description);
+			Log::error("GLFW Error {}: {}", error, description);
 		});
-}
-
-Window::~Window()
-{
-	glfwTerminate();
 }
 
 void Window::setTitle(const std::string& title)

@@ -2,14 +2,10 @@
 #include "Application.h"
 #include "Events/WindowEvent.h"
 
-using namespace pt;
-
 int main()
 {
 	{
-		Log::init();
-
-		Application app;
+		pt::Application app;
 		app.run();
 	}
 
