@@ -9,7 +9,6 @@ namespace pt
 Window::Window(uint32_t width, uint32_t height, const std::string& title)
 	: m_width(width), m_height(height), m_title(title)
 {
-
 }
 
 Window::~Window()

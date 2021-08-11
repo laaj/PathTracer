@@ -1,14 +1,16 @@
 # Source files
 set(SOURCE_FILES
-	main.cpp
 	mypch.h
-	Application.h
-	Application.cpp
 
+	Core/main.cpp
+	Core/Application.h
+	Core/Application.cpp
 	Core/Log.h
 	Core/Log.cpp
 	Core/utils.h
 	Core/utils.cpp
+	Core/PathTracerContext.h
+	Core/PathTracerContext.cpp
 
 	Events/Event.h
 	Events/EventDispatcher.h
@@ -18,8 +20,8 @@ set(SOURCE_FILES
 
 	UI/Window.h
 	UI/Window.cpp
-	UI/Editor.h
-	UI/Editor.cpp
+	UI/ImGuiContext.h
+	UI/ImGuiContext.cpp
 )
 
 # Preserve the project hierarchy in IDEs

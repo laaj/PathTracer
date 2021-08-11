@@ -15,3 +15,6 @@ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin")
 # Deps and src directories
 add_subdirectory(ext)
 add_subdirectory(src)
+
+# Place the external projects into a common folder
+set_property(TARGET ${LIBRARIES} PROPERTY FOLDER "ext")

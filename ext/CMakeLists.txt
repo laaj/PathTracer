@@ -9,7 +9,7 @@ set(GLFW_INSTALL OFF CACHE BOOL "" FORCE)
 add_subdirectory(glfw)
 
 # glad
-add_library(glad glad/src/glad.c)
+add_library(glad glad/src/glad.c glad/include/glad/glad.h)
 target_include_directories(glad PUBLIC glad/include)
 
 # ImGui
@@ -21,6 +21,12 @@ add_library(imgui
 	imgui/imgui_widgets.cpp
 	imgui/backends/imgui_impl_glfw.cpp
 	imgui/backends/imgui_impl_opengl3.cpp
+
+	imgui/imgui.h
+	imgui/imconfig.h
+	imgui/imgui_internal.h
+	imgui/backends/imgui_impl_glfw.h
+	imgui/backends/imgui_impl_opengl3.h
 )
 target_include_directories(imgui PUBLIC 
 	imgui
@@ -36,10 +42,3 @@ set(LIBRARIES
 	imgui
 PARENT_SCOPE)
 
-# Place the external projects into a common folder
-set_property(TARGET 
-	spdlog 
-	glfw 
-	glad 
-	imgui 
-PROPERTY FOLDER "ext")

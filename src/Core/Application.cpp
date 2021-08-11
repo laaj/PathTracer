@@ -1,4 +1,6 @@
 #include "Application.h"
+#include <imgui.h>
+#include "Events/WindowEvent.h"
 
 namespace pt
 {
@@ -8,11 +10,12 @@ Application* Application::s_instance = nullptr;
 Application::Application()
 	: m_window(800, 600, "Path Tracer")
 {
+	PT_ASSERT(s_instance == nullptr);
 	s_instance = this;	
 
 	Log::init();
 	m_window.init();
-	m_editor.init();
+	m_imguiContext.init();
 
 	// Window event callbacks.
 	auto& windowEventBinder = m_window.getEventBinder();
@@ -21,20 +24,21 @@ Application::Application()
 
 void Application::run()
 {
+	PT_ASSERT(!m_running);
+	m_running = true;
+
 	while (m_running)
 	{
 		glClearColor(0, 0, 0, 1);
 		glClear(GL_COLOR_BUFFER_BIT);
 
-		m_editor.render();
+		m_imguiContext.startRender();
+		m_ptContext.renderImGui();
+		m_imguiContext.endRender();
 
-		m_window.swapBuffers();
 		m_window.pollEvents();
+		m_window.swapBuffers();
 	}
-}
-
-void Application::update()
-{
 }
 
 bool Application::handleWindowClose(WindowCloseEvent& ev)
